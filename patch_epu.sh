@@ -43,8 +43,6 @@ if [ -x ./patchelf ]
     cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/patchelf" echo    
     wget https://github.com/caroli-magni/epu-build-tools/raw/main/patchelf
     cecho "RED" "You must give ./patchelf executable permissions (chmod +x $WD/patchelf)" echo
-    cecho "RED" "Exiting..." echo
-    exit
 fi
 
 if [ -s ./libbfd-2.26.1-system.so ]

@@ -69,7 +69,7 @@ if [ -x ./x86_64-linux-gnu-ar-2.26 ]
     cecho "RED" "Files required for this script:" echo
     cecho "RED" " 10b05608eeec73ddb6e10c040e5d3483682e92b43e37f21934112cb391f9de02  x86_64-linux-gnu-ar-2.26" echo
     cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/x86_64-linux-gnu-ar-2.26" echo
-    wget https://github.com/caroli-magni/epu-build-tools/raw/main/patch_epu.sh | cecho "CYAN" - echo
+    wget https://github.com/caroli-magni/epu-build-tools/raw/main/patch_epu.sh
     cecho "RED" "You must give ./x86_64-linux-gnu-ar-2.26 executable permissions (chmod +x)" echo
     cecho "RED" "Exiting..." echo
     exit

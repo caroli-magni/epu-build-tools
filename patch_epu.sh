@@ -91,7 +91,7 @@ fi
 
 cecho "CYAN" "Downloading the epson-printer-utility .deb installation package..." echo
 wget https://download3.ebz.epson.net/dsc/f/03/00/14/48/17/b62b6bb593b3262a4df82f55161c89d0c776de21/epson-printer-utility_1.1.1-1lsb3.2_amd64.deb -O epu.deb -nv
-cecho "CYAN" echo "Extracting the EPU .deb package..." echo
+cecho "CYAN" "Extracting the EPU .deb package..." echo
 ./x86_64-linux-gnu-ar-2.26 -x epu.deb
 cecho "CYAN" "Extracting the the inner tars..." echo
 tar xf data.tar.gz

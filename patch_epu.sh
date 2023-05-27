@@ -12,6 +12,7 @@ cecho(){
     printf "${!1}${2} ${NC}\n" # <-- bash
 }
 
+
 WD=`pwd`
 WDNAME=`basename "$PWD"`
 if [ $WDNAME != "epu-build-tools" ]

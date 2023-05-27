@@ -16,9 +16,9 @@ WD=`pwd`
 WDNAME=`basename "$PWD"`
 if [ $WDNAME != "epu-build-tools" ]
     then
-    echo "It looks like I'm being run from the wrong place."
-    echo "Run me from inside a directory called "epu-build-tools/" alongside the required files:"
-    echo "pwd: "$WD
+    cecho "RED" "It looks like I'm being run from the wrong place." echo
+    cecho "RED"  "Run me from inside a directory called "epu-build-tools/" alongside the required files:" echo
+    cecho "RED"  "pwd: "$WD echo
     echo "Files required for this script:"
     echo " e600fe49f91c982f681de41ef6fb36b1d6df2e4c41b3e2114d024f4a3bea3ffc  patchelf   "
     echo " 10b05608eeec73ddb6e10c040e5d3483682e92b43e37f21934112cb391f9de02  x86_64-linux-gnu-ar-2.26"

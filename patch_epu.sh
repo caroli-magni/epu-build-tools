@@ -94,51 +94,51 @@ if [ -s ./libbfd-2.26.1-system.so ]
     exit
 fi
 
-echo "Downloading the epson-printer-utility .deb installation package..."
+cecho "CYAN" "Downloading the epson-printer-utility .deb installation package..." echo
 wget https://download3.ebz.epson.net/dsc/f/03/00/14/48/17/b62b6bb593b3262a4df82f55161c89d0c776de21/epson-printer-utility_1.1.1-1lsb3.2_amd64.deb -O epu.deb -nv
-echo "Extracting the EPU .deb package..."
+cecho "CYAN" echo "Extracting the EPU .deb package..." echo
 ./x86_64-linux-gnu-ar-2.26 -x epu.deb
-echo "Extracting the the inner tars..."
+cecho "CYAN" "Extracting the the inner tars..." echo
 tar xf data.tar.gz
 tar xf control.tar.gz
-echo "Deleting unneeded files..."
+cecho "CYAN"  "Deleting unneeded files..." echo
 rm postrm prerm preinst data.tar.gz control.tar.gz epu.deb control debian-binary
 
 
 
 
-echo "Downloading the libaudio2 .deb installation package..."
+cecho "CYAN"  "Downloading the libaudio2 .deb installation package..." echo
 wget http://launchpadlibrarian.net/331724376/libaudio2_1.9.4-6_amd64.deb -O libaudio2.deb -nv
-echo "Extracting the libaudio2 .deb package..."
+cecho "CYAN"  "Extracting the libaudio2 .deb package..." echo
 ./x86_64-linux-gnu-ar-2.26 -x libaudio2.deb
 tar xf data.tar.xz
 echo "Cleaning up..."
 rm data.tar.xz libaudio2.deb
 
-echo "Downloading the libqtgui4 .deb installation package..."
+cecho "CYAN"  "Downloading the libqtgui4 .deb installation package..." echo
 wget http://launchpadlibrarian.net/261237166/libqtgui4_4.8.7+dfsg-7ubuntu1_amd64.deb -O libqtgui4.deb -nv
-echo "Extracting the libqtgui4 .deb package..."
+cecho "CYAN"  "Extracting the libqtgui4 .deb package..." echo
 ./x86_64-linux-gnu-ar-2.26 -x libqtgui4.deb
 tar xf data.tar.xz
-echo "Cleaning up..."
+cecho "CYAN"  "Cleaning up..." echo
 rm control.tar.gz data.tar.xz libqtgui4.deb
 
-echo "Downloading the libqtcore4 .deb installation package..."
+cecho "CYAN"  "Downloading the libqtcore4 .deb installation package..." echo
 wget http://launchpadlibrarian.net/261237164/libqtcore4_4.8.7+dfsg-7ubuntu1_amd64.deb -O libqtcore4.deb -nv
-echo "Extracting the libqtcore4 .deb package..."
+cecho "CYAN"  "Extracting the libqtcore4 .deb package..." echo
 ./x86_64-linux-gnu-ar-2.26 -x libqtcore4.deb
 tar xf data.tar.xz
-echo "Cleaning up..."
+cecho "CYAN"  "Cleaning up..." echo
 rm control.tar.gz data.tar.xz libqtcore4.deb
 
-echo "Patching .deb post-install script to use relative paths..."
+cecho "CYAN"  "Patching .deb post-install script to use relative paths..." echo
 # patch post-installation script to work with relative directories instead of default system paths
 sed -i 's/\/usr\/lib\//.\/usr\/lib\//g' postinst
 sed -i 's/\/opt\/epson-printer-utility\//.\/opt\/epson-printer-utility\//g' postinst
 sed -i 's/cd \.\/usr\/lib\/epson-backend\/scripts\///g' postinst
 sed -i 's/\.\/inst-/\.\/usr\/lib\/epson-backend\/scripts\/inst-/g' postinst
 
-echo "Patching .deb post-install script to install LSB system pointers..."
+cecho "CYAN"  "Patching .deb post-install script to install LSB system pointers..." echo
 # strip the shebang from the original postinst script
 sed -i 's/\#\!\/bin\/bash//g' postinst
 # take the old contents and put them elsewhere
@@ -156,15 +156,15 @@ cat postinst.0 >> postinst
 # delete temporary file
 rm postinst.0
 
-echo "Patching EPU post-install script to use relative paths..."
+cecho "CYAN" "Patching EPU post-install script to use relative paths..." echo
 sed -i 's/\/usr\//\.\/usr\//g' ./usr/lib/epson-backend/scripts/inst-cups-post.sh
 sed -i 's/\=\//\=\.\//g' ./usr/lib/epson-backend/scripts/inst-cups-post.sh
 
-echo "Patching EPU system daemon installer to use relative paths..."
+cecho "CYAN"  "Patching EPU system daemon installer to use relative paths..." echo
 sed -i 's/sbindir\=\//sbindir\=\.\//g' ./usr/lib/epson-backend/rc.d/inst-rc_d.sh
 sed -i 's/pkgrcddir\=\//pkgrcddir\=\.\//g' ./usr/lib/epson-backend/rc.d/inst-rc_d.sh
 
-echo "Patching EPU system daemon startup script to use relative paths..."
+cecho "CYAN"  "Patching EPU system daemon startup script to use relative paths..." echo
 sed -i 's/pkglibdir\=\//pkglibdir\=\.\//g' ./usr/lib/epson-backend/rc.d/ecbd
 sed -i 's/pkgrcddir\=\//pkgrcddir\=\.\//g' ./usr/lib/epson-backend/rc.d/ecbd
 

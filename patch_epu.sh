@@ -39,7 +39,10 @@ if [ -x ./patchelf ]
     cecho "RED" $WD\/"patchelf  - not found!" echo
     cecho "RED" "Files required for this script:" echo
     cecho "RED" " e600fe49f91c982f681de41ef6fb36b1d6df2e4c41b3e2114d024f4a3bea3ffc  patchelf   " echo
-    cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/patchelf" echo
+    cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/patchelf" echo    
+    wget https://github.com/caroli-magni/epu-build-tools/raw/main/patchelf
+    cecho "RED" "You must give ./patchelf executable permissions (chmod +x $WD/patchelf)" echo
+    cecho "RED" "Exiting..." echo
     exit
 fi
 
@@ -69,8 +72,8 @@ if [ -x ./x86_64-linux-gnu-ar-2.26 ]
     cecho "RED" "Files required for this script:" echo
     cecho "RED" " 10b05608eeec73ddb6e10c040e5d3483682e92b43e37f21934112cb391f9de02  x86_64-linux-gnu-ar-2.26" echo
     cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/x86_64-linux-gnu-ar-2.26" echo
-    wget https://github.com/caroli-magni/epu-build-tools/raw/main/patch_epu.sh
-    cecho "RED" "You must give ./x86_64-linux-gnu-ar-2.26 executable permissions (chmod +x)" echo
+    wget https://github.com/caroli-magni/epu-build-tools/raw/main/x86_64-linux-gnu-ar-2.26
+    cecho "RED" "You must give ./x86_64-linux-gnu-ar-2.26 executable permissions (chmod +x $WD/x86_64-linux-gnu-ar-2.26)" echo
     cecho "RED" "Exiting..." echo
     exit
 fi
@@ -89,7 +92,13 @@ if [ -s ./libbfd-2.26.1-system.so ]
     cecho "RED"  "Files required for this script:" echo
     cecho "RED" " 4e5671394ae13ed3599050093023c23e6b53dd5d00b9a5ff6730fc2ec2afcd50  libbfd-2.26.1-system.so" echo
     cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/libbfd-2.26.1-system.so" echo
-    exit
+    wget https://github.com/caroli-magni/epu-build-tools/raw/main/libbfd-2.26.1-system.so
+    echo "4e5671394ae13ed3599050093023c23e6b53dd5d00b9a5ff6730fc2ec2afcd50  libbfd-2.26.1-system.so" | sha256sum -c - 1>/dev/null
+    RETVAL=$?;
+    if [ "$RETVAL" -eq 0 ]
+        then
+        cecho "GREEN" "libbfd-2.26.1-system.so: OK" echo
+    fi
 fi
 
 cecho "CYAN" "Downloading the epson-printer-utility .deb installation package..." echo

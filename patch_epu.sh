@@ -47,6 +47,29 @@ if [ -x ./patchelf ]
     exit
 fi
 
+if [ -s ./libbfd-2.26.1-system.so ]
+    then
+    LIBBFD_PRESENT=true
+    echo "4e5671394ae13ed3599050093023c23e6b53dd5d00b9a5ff6730fc2ec2afcd50  libbfd-2.26.1-system.so" | sha256sum -c - 1>/dev/null
+    RETVAL=$?;
+    if [ "$RETVAL" -eq 0 ]
+        then
+        cecho "GREEN" "libbfd-2.26.1-system.so: OK" echo
+    fi
+    else
+    cecho "RED" $WD\/"libbfd-2.26.1-system.so - not found!" echo
+    cecho "RED"  "Files required for this script:" echo
+    cecho "RED" " 4e5671394ae13ed3599050093023c23e6b53dd5d00b9a5ff6730fc2ec2afcd50  libbfd-2.26.1-system.so" echo
+    cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/libbfd-2.26.1-system.so" echo
+    wget https://github.com/caroli-magni/epu-build-tools/raw/main/libbfd-2.26.1-system.so
+    echo "4e5671394ae13ed3599050093023c23e6b53dd5d00b9a5ff6730fc2ec2afcd50  libbfd-2.26.1-system.so" | sha256sum -c - 1>/dev/null
+    RETVAL=$?;
+    if [ "$RETVAL" -eq 0 ]
+        then
+        cecho "GREEN" "libbfd-2.26.1-system.so: OK" echo
+    fi
+fi
+
 if [ -x ./x86_64-linux-gnu-ar-2.26 ]
     then
     AR_PRESENT=true
@@ -77,29 +100,6 @@ if [ -x ./x86_64-linux-gnu-ar-2.26 ]
     cecho "RED" "You must give ./x86_64-linux-gnu-ar-2.26 executable permissions (chmod +x $WD/x86_64-linux-gnu-ar-2.26)" echo
     cecho "RED" "Exiting..." echo
     exit
-fi
-
-if [ -s ./libbfd-2.26.1-system.so ]
-    then
-    LIBBFD_PRESENT=true
-    echo "4e5671394ae13ed3599050093023c23e6b53dd5d00b9a5ff6730fc2ec2afcd50  libbfd-2.26.1-system.so" | sha256sum -c - 1>/dev/null
-    RETVAL=$?;
-    if [ "$RETVAL" -eq 0 ]
-        then
-        cecho "GREEN" "libbfd-2.26.1-system.so: OK" echo
-    fi
-    else
-    cecho "RED" $WD\/"libbfd-2.26.1-system.so - not found!" echo
-    cecho "RED"  "Files required for this script:" echo
-    cecho "RED" " 4e5671394ae13ed3599050093023c23e6b53dd5d00b9a5ff6730fc2ec2afcd50  libbfd-2.26.1-system.so" echo
-    cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/libbfd-2.26.1-system.so" echo
-    wget https://github.com/caroli-magni/epu-build-tools/raw/main/libbfd-2.26.1-system.so
-    echo "4e5671394ae13ed3599050093023c23e6b53dd5d00b9a5ff6730fc2ec2afcd50  libbfd-2.26.1-system.so" | sha256sum -c - 1>/dev/null
-    RETVAL=$?;
-    if [ "$RETVAL" -eq 0 ]
-        then
-        cecho "GREEN" "libbfd-2.26.1-system.so: OK" echo
-    fi
 fi
 
 cecho "CYAN" "Downloading the epson-printer-utility .deb installation package..." echo

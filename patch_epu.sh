@@ -98,19 +98,14 @@ echo "Downloading the libaudio2 .deb installation package..."
 wget http://launchpadlibrarian.net/331724376/libaudio2_1.9.4-6_amd64.deb -O libaudio2.deb -nv
 echo "Extracting the libaudio2 .deb package..."
 ./x86_64-linux-gnu-ar-2.26 -x libaudio2.deb
-echo "Extracting the the inner tar..."
 tar xf data.tar.xz
 echo "Cleaning up..."
 rm data.tar.xz libaudio2.deb
-
-
-
 
 echo "Downloading the libqtgui4 .deb installation package..."
 wget http://launchpadlibrarian.net/261237166/libqtgui4_4.8.7+dfsg-7ubuntu1_amd64.deb -O libqtgui4.deb -nv
 echo "Extracting the libqtgui4 .deb package..."
 ./x86_64-linux-gnu-ar-2.26 -x libqtgui4.deb
-echo "Extracting the the inner tar..."
 tar xf data.tar.xz
 echo "Cleaning up..."
 rm control.tar.gz data.tar.xz libqtgui4.deb
@@ -119,11 +114,9 @@ echo "Downloading the libqtcore4 .deb installation package..."
 wget http://launchpadlibrarian.net/261237164/libqtcore4_4.8.7+dfsg-7ubuntu1_amd64.deb -O libqtcore4.deb -nv
 echo "Extracting the libqtcore4 .deb package..."
 ./x86_64-linux-gnu-ar-2.26 -x libqtcore4.deb
-echo "Extracting the the inner tar..."
 tar xf data.tar.xz
 echo "Cleaning up..."
 rm control.tar.gz data.tar.xz libqtcore4.deb
-
 
 echo "Patching .deb post-install script to use relative paths..."
 # patch post-installation script to work with relative directories instead of default system paths
@@ -150,8 +143,6 @@ cat postinst.0 >> postinst
 # delete temporary file
 rm postinst.0
 
-
-
 echo "Patching EPU post-install script to use relative paths..."
 sed -i 's/\/usr\//\.\/usr\//g' ./usr/lib/epson-backend/scripts/inst-cups-post.sh
 sed -i 's/\=\//\=\.\//g' ./usr/lib/epson-backend/scripts/inst-cups-post.sh
@@ -166,7 +157,8 @@ sed -i 's/pkgrcddir\=\//pkgrcddir\=\.\//g' ./usr/lib/epson-backend/rc.d/ecbd
 
 
 echo "Patching EPU main binary to use /lib/ path for qt4libs+libaudio..."
-# patch the main EPU binary
+
 patchelf --force-rpath --set-rpath '$ORIGIN/../lib/' ./opt/epson-printer-utility/bin/epson-printer-utility
+
 cp -R ./usr/lib/x86_64-linux-gnu/*.so* ./opt/epson-printer-utility/lib/
 

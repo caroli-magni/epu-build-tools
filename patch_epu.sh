@@ -1,3 +1,4 @@
+#!/bin/bash
 cecho(){
     RED="\033[0;31m"
     GREEN="\033[0;32m"  # <-- [0 means not bold
@@ -11,18 +12,19 @@ cecho(){
     printf "${!1}${2} ${NC}\n" # <-- bash
 }
 
-
 WD=`pwd`
 WDNAME=`basename "$PWD"`
 if [ $WDNAME != "epu-build-tools" ]
     then
-    echo "It looks like I'm being run from the wrong place, quitting..."
+    echo "It looks like I'm being run from the wrong place."
+    echo "Run me from inside a directory called "epu-build-tools/" alongside the required files:"
     echo "pwd: "$WD
+    echo "Files required for this script:"
+    echo " e600fe49f91c982f681de41ef6fb36b1d6df2e4c41b3e2114d024f4a3bea3ffc  patchelf   "
+    echo " 10b05608eeec73ddb6e10c040e5d3483682e92b43e37f21934112cb391f9de02  x86_64-linux-gnu-ar-2.26"
+    echo " 4e5671394ae13ed3599050093023c23e6b53dd5d00b9a5ff6730fc2ec2afcd50  libbfd-2.26.1-system.so"
     exit
 fi
-
-
-
 
 echo "Files required for this script:"
 echo " e600fe49f91c982f681de41ef6fb36b1d6df2e4c41b3e2114d024f4a3bea3ffc  patchelf   "

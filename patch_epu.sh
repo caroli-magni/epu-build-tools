@@ -42,6 +42,10 @@ if [ -x ./patchelf ]
     fi
     else
     cecho "RED" $WD\/"patchelf  - not found!" echo
+    cecho "RED" "Files required for this script:" echo
+    cecho "RED" " e600fe49f91c982f681de41ef6fb36b1d6df2e4c41b3e2114d024f4a3bea3ffc  patchelf   " echo
+    cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/patchelf" echo
+    exit
 fi
 
 if [ -x ./x86_64-linux-gnu-ar-2.26 ]
@@ -63,9 +67,14 @@ if [ -x ./x86_64-linux-gnu-ar-2.26 ]
     if [ "$RETVAL" -eq 127 ]
         then
         cecho "RED" $WD\/"x86_64-linux-gnu-ar-2.26 - not patched!" echo
+        exit
     fi
     else
     cecho "RED" $WD\/"x86_64-linux-gnu-ar-2.26 - not found!" echo
+    cecho "RED" "Files required for this script:" echo
+    cecho "RED" " 10b05608eeec73ddb6e10c040e5d3483682e92b43e37f21934112cb391f9de02  x86_64-linux-gnu-ar-2.26" echo
+    cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/x86_64-linux-gnu-ar-2.26" echo
+    exit
 fi
 
 if [ -s ./libbfd-2.26.1-system.so ]
@@ -79,6 +88,10 @@ if [ -s ./libbfd-2.26.1-system.so ]
     fi
     else
     cecho "RED" $WD\/"libbfd-2.26.1-system.so - not found!" echo
+    cecho "RED"  "Files required for this script:" echo
+    cecho "RED" " 4e5671394ae13ed3599050093023c23e6b53dd5d00b9a5ff6730fc2ec2afcd50  libbfd-2.26.1-system.so" echo
+    cecho "GREEN" "Available at: https://github.com/caroli-magni/epu-build-tools/raw/main/libbfd-2.26.1-system.so" echo
+    exit
 fi
 
 echo "Downloading the epson-printer-utility .deb installation package..."
